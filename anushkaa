@@ -1,0 +1,20 @@
+import streamlit as st
+import pandas as pd
+
+# Load food price data
+food_prices = pd.read_csv('food_prices.csv')
+
+# Create atitle for the app
+st.title('Food Prices')
+
+# Add a selectbox to select the food item
+food_item = st.selectbox('Select a food item', food_prices['food_item'].unique())
+
+# Filter the data based on the selected food item
+filtered_data = food_prices[food_prices['food_item'] == food_item]
+
+# Add a line chart to display the prices over time
+st.line_chart(filtered_data['price'])
+
+# Add a table to display the data
+st.write(filtered_data)
